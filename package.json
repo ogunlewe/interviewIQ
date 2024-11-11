@@ -1,0 +1,17 @@
+{
+  "name": "coach",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "firebase": "^11.0.1"
+  }
+}
