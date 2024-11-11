@@ -63,7 +63,7 @@ const firebaseConfig = {
           const user = userCredential.user;
           showModal("Sign-in successful! Welcome back, " + user.email);
           signinForm.reset();
-          window.location.href = '../public/app.html';
+          window.location.href = '../public/apply.html';
 
         })
         .catch((error) => {
@@ -78,7 +78,7 @@ const firebaseConfig = {
         .then((result) => {
           const user = result.user;
           showModal("Google sign-in successful! Welcome, " + user.displayName);
-          window.location.href = '../public/app.html';
+          window.location.href = '../public/apply.html';
 
         })
         .catch((error) => {

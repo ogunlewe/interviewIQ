@@ -53,7 +53,7 @@ const app = initializeApp(firebaseConfig);
           const user = userCredential.user;
           showModal("Signup successful! Welcome, " + user.email);
           signupForm.reset();
-          window.location.href = '../public/index.html';
+          window.location.href = '../public/apply.html';
 
         })
         .catch((error) => {
@@ -68,7 +68,7 @@ const app = initializeApp(firebaseConfig);
         .then((result) => {
           const user = result.user;
           showModal("Google signup successful! Welcome, " + user.displayName);
-          window.location.href = '../public/index.html';
+          window.location.href = '../public/apply.html';
 
         })
         .catch((error) => {
