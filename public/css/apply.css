@@ -1,7 +1,7 @@
 body {
-	margin: 0;
-	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-	background: #2a3047;
+    margin: 0;
+    font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    background: #2a3047;
     overflow: hidden;
 }
 
@@ -13,10 +13,10 @@ h1 {
 
 
 .apply-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex;
     text-align: center;
 
 }
@@ -30,24 +30,24 @@ h1 {
 }
 
 .input-block {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
     position: relative;
 }
 
 .input-block label {
-	font-size: 25px;
+    font-size: 25px;
     color: #788a8a;
 }
 
 .input-block input {
-	width: 400px;
+    width: 400px;
     margin-top: 10px;
-	display: block;
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 16px;
-	line-height: 40px;
-	color: #3b4465;
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 16px;
+    line-height: 40px;
+    color: #3b4465;
     background: #eef9fe;
     border: 1px solid #cddbef;
     border-radius: 10px;
@@ -58,60 +58,60 @@ h1 {
 
 
 .role-block {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
     position: relative;
     display: block;
 
-   
+
 }
 
 .role-block label {
-	font-size: 25px;
+    font-size: 25px;
     color: #788a8a;
 }
 
 .role-block input {
-	width: 400px;
+    width: 400px;
     margin-top: 10px;
     display: block;
-	
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 16px;
-	line-height: 40px;
-	color: #3b4465;
+
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 16px;
+    line-height: 40px;
+    color: #3b4465;
     background: #eef9fe;
     border: 1px solid #cddbef;
     border-radius: 10px;
     outline: none;
-   
-} 
+
+}
 
 .level-block {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
     position: relative;
     display: block;
-    
+
 
 }
 
 .level-block label {
-	font-size: 25px;
+    font-size: 25px;
     color: #788a8a;
     display: block;
-    
+
 
 }
 
 .level-block input {
-	width: 400px;
+    width: 400px;
     margin-top: 10px;
-	display: block;
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 16px;
-	line-height: 40px;
-	color: #3b4465;
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 16px;
+    line-height: 40px;
+    color: #3b4465;
     background: #eef9fe;
     border: 1px solid #cddbef;
     border-radius: 10px;
@@ -132,29 +132,47 @@ button {
     cursor: pointer;
     border-radius: 20px;
 }
+
+
+
+/* Progress bar styles */
 .progress-container {
-    width: 100%;
-    height: 5px;
+    width: 80%;
+    height: 8px;
     background-color: #e0e0e0;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .progress-indicator {
     height: 100%;
     width: 0;
-    background-color: #4caf50; 
-    transition: width 0.5s ease-in-out;
+    background: linear-gradient(90deg, #005e03, #03a50b);
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out;
 }
 
+.progress-step {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #095c0b;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out;
+}
 
+/* Section and icon styles */
 .fade-element {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.5s ease, visibility 0.5s ease;
+    position: relative;
 }
 
 .hidden {
@@ -162,3 +180,19 @@ button {
     visibility: hidden;
 }
 
+/* Icon styles */
+.icon {
+    position: absolute;
+    top: 0;
+    left: 900px;
+    font-size: 60px;
+    color: #e0e0e0;
+    float: right;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.icon.show {
+    opacity: 0.1;
+    transform: translateY(0);
+}
