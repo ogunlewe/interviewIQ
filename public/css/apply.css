@@ -1,0 +1,149 @@
+body {
+	margin: 0;
+	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+	background: #2a3047;
+    overflow: hidden;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+
+}
+
+
+.apply-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex;
+    text-align: center;
+
+}
+
+
+.main-content {
+    display: flex;
+    text-align: center;
+    margin: 250px;
+    float: right;
+}
+
+.input-block {
+	margin-bottom: 20px;
+    position: relative;
+}
+
+.input-block label {
+	font-size: 25px;
+    color: #788a8a;
+}
+
+.input-block input {
+	width: 400px;
+    margin-top: 10px;
+	display: block;
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #3b4465;
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 10px;
+    outline: none;
+    display: block;
+
+}
+
+
+.role-block {
+	margin-bottom: 20px;
+    position: relative;
+    display: block;
+
+   
+}
+
+.role-block label {
+	font-size: 25px;
+    color: #788a8a;
+}
+
+.role-block input {
+	width: 400px;
+    margin-top: 10px;
+    display: block;
+	
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #3b4465;
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 10px;
+    outline: none;
+   
+} 
+
+.level-block {
+	margin-bottom: 20px;
+    position: relative;
+    display: block;
+    
+
+}
+
+.level-block label {
+	font-size: 25px;
+    color: #788a8a;
+    display: block;
+    
+
+}
+
+.level-block input {
+	width: 400px;
+    margin-top: 10px;
+	display: block;
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #3b4465;
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 10px;
+    outline: none;
+    display: none;
+}
+
+
+
+
+button {
+    background: #151927;
+    color: white;
+    padding: 10px;
+    width: 250px;
+    margin-top: 10px;
+    border: 2px solid #525d83;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+
+
+
+.fade-element {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
