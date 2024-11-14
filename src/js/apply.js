@@ -1,20 +1,35 @@
-
 const sections = document.querySelectorAll('.fade-element');
+const progressIndicator = document.getElementById('progress-indicator');
 let currentSectionIndex = 0;
+let isTransitioning = false;
 
 
 function nextQuestion() {
-    
-    sections[currentSectionIndex].classList.add('hidden');
+    if (isTransitioning) return;
+    isTransitioning = true;
 
-    
-    if (currentSectionIndex < sections.length - 1) {
-       
-        currentSectionIndex++;
+    const currentSection = sections[currentSectionIndex];
+    currentSection.classList.add('hidden');
 
-        
-        setTimeout(() => {
+   
+    currentSection.addEventListener('transitionend', function handler() {
+        currentSection.removeEventListener('transitionend', handler);
+
+      
+        if (currentSectionIndex < sections.length - 1) {
+            currentSectionIndex++;
             sections[currentSectionIndex].classList.remove('hidden');
-        }, 500);
-    }
+
+          
+            updateProgressIndicator();
+        }
+
+        isTransitioning = false;
+    });
+}
+
+
+function updateProgressIndicator() {
+    const progressPercentage = ((currentSectionIndex + 1) / sections.length) * 100;
+    progressIndicator.style.width = progressPercentage + '%';
 }
