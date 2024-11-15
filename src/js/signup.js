@@ -28,6 +28,7 @@ const app = initializeApp(firebaseConfig);
     const modal = document.getElementById("modal");
     const modalMessage = document.getElementById("modal-message");
     const closeModalBtn = document.getElementById("close-modal");
+    const userEmailElement = document.getElementById('user-email');
 
     // Function to show modal with a message
     function showModal(message, isError = false) {
@@ -75,6 +76,20 @@ const app = initializeApp(firebaseConfig);
           showModal("Error: " + error.message, true);
         });
     });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          // User is signed in, display the email
+          userEmailElement.textContent = user.email;
+          signInButton.style.display = 'none';
+          signOutButton.style.display = 'block';
+      } else {
+          // User is signed out, clear the email display
+          userEmailElement.textContent = "Not logged in";
+          signInButton.style.display = 'block';
+          signOutButton.style.display = 'none';
+      }
+  });
 
 
 

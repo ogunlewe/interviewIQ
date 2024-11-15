@@ -31,6 +31,7 @@ const firebaseConfig = {
     const modalMessage = document.getElementById("modal-message");
     const closeModalBtn = document.getElementById("close-modal");
     const forgotPasswordLink = document.getElementById("forgot-password");
+    const userEmailElement = document.getElementById('user-email');
 
     
     function showModal(message, isError = false) {
@@ -104,3 +105,17 @@ const firebaseConfig = {
           showModal("Error: " + error.message, true);
         });
     });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          // User is signed in, display the email
+          userEmailElement.textContent = user.email;
+          signInButton.style.display = 'none';
+          signOutButton.style.display = 'block';
+      } else {
+          // User is signed out, clear the email display
+          userEmailElement.textContent = "Not logged in";
+          signInButton.style.display = 'block';
+          signOutButton.style.display = 'none';
+      }
+  });

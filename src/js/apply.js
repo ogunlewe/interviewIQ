@@ -68,7 +68,98 @@ myButtons.forEach(button => {
       }
     });
 
+
     button.style.background = "green";
     button.style.color = "white";
   }
+});
+
+
+
+let db;
+function initDB() {
+  const request = indexedDB.open('userDatabase', 1);
+
+  request.onerror = (event) => {
+    console.error('Error opening IndexedDB:', event.target.error);
+  };
+
+  request.onsuccess = (event) => {
+    db = event.target.result;
+    console.log('IndexedDB initialized');
+    displayStoredValue();
+    
+  };
+
+    request.onupgradeneeded = (event) => {
+      db = event.target.result;
+      const objectStore = db.createObjectStore('userStore', { keyPath: 'id' });
+      objectStore.transaction.oncomplete = () => {
+          console.log('Object store created');
+      };
+  };
+
+}
+
+function saveToIndexedDB() {
+  const inputField = document.getElementById('name');
+  const userInput = inputField.value.trim();
+
+  if (userInput) {
+    const transaction = db.transaction(['userStore'], 'readwrite');
+        const objectStore = transaction.objectStore('userStore');
+
+        const data = {
+          id: 1,
+          value: userInput
+        };
+
+        const request = objectStore.put(data);
+
+        request.onsuccess = () => {
+          console.log('Data Saved:', userInput);
+          displayStoredValue();
+          inputField.value = '';
+        };
+
+        request.onerror = (event) => {
+          console.error('Error saving data: ', event.target.error);
+          
+        }
+  }
+  else {
+    alert('Please enter a value')
+  }
+}
+
+
+function displayStoredValue() {
+  const transaction = db.transaction(['userStore'], 'readonly');
+  const objectStore = transaction.objectStore('userStore');
+
+  const request = objectStore.get(1);
+
+  request.onsuccess = (event) => {
+    const result = event.target.result;
+    const displayValue = document.getElementById('user-email');
+    
+    if (result) {
+      displayValue.textContent = result.value;
+
+    } else {
+      displayValue.textContent = ' Error Displaying ';
+    }
+  };
+
+  request.onerror = (event) => {
+    console.error('Error retrieving data:', event.target.error);
+    
+  };
+}
+
+window.addEventListener('load', () => {
+  initDB();
+
+  const saveButton = document.getElementById('button');
+  saveButton.addEventListener('click', saveToIndexedDB)
 });
