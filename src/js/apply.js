@@ -2,7 +2,7 @@ const sections = document.querySelectorAll(".fade-element");
 const icons = document.querySelectorAll(".icon");
 const progressIndicator = document.getElementById("progress-indicator");
 const progressStep = document.getElementById("progress-step");
-const  button = document.getElementById("button");
+const  myButtons = document.querySelectorAll(".my-buttons");
 
 
 
@@ -50,9 +50,25 @@ function updateProgressIndicator() {
   progressStep.style.transform = `translateX(${stepPosition - 15}px)`;
 }
 
-buttons.forEach(element => {
-  button.onclick = function() {
-    button.style.background ="green";
-  }  
-});
 
+
+
+const originalColors = new Map();
+
+
+myButtons.forEach(button => {
+
+  originalColors.set(button, window.getComputedStyle(button).color);
+
+  button.onclick = function() {
+
+    myButtons.forEach(otherButton => {
+      if (otherButton !== button) {
+        otherButton.style.color = originalColors.get(otherButton);
+      }
+    });
+
+    button.style.background = "green";
+    button.style.color = "white";
+  }
+});
