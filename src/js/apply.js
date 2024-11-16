@@ -71,6 +71,7 @@ myButtons.forEach(button => {
 
     button.style.background = "green";
     button.style.color = "white";
+    window.location.href = "dashboard.html";
   }
 });
 
