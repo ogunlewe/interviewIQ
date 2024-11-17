@@ -3,9 +3,8 @@
 const questions = document.getElementById("question-text");
 const button = document.getElementById("submit-button");
 
-let questionIndex = 0; // Track the current question index
-let questionList = []; // Store fetched questions
-
+let questionIndex = 0; 
+let questionList = []; 
 
 function fetchQuestions() {
   fetch('https://devq-api.vercel.app/api/questions', {
@@ -34,31 +33,29 @@ function fetchQuestions() {
     });
 }
 
-
 function displayQuestion() {
   if (questionIndex < questionList.length) {
     const currentQuestion = questionList[questionIndex];
     const questionText = currentQuestion.question;
     const additionalInfo = currentQuestion.answerHint;
 
-   
     questions.innerHTML = "";
-
-    
     const questionElement = document.createElement("div");
     questionElement.className = "question";
 
+    
     const questionTextElement = document.createElement("p");
     questionTextElement.textContent = `Q${questionIndex + 1}: ${questionText}`;
     questionElement.appendChild(questionTextElement);
 
+    
     const additionalInfoElement = document.createElement("p");
     additionalInfoElement.textContent = `Hint: ${additionalInfo}`;
     questionElement.appendChild(additionalInfoElement);
 
+    
     questions.appendChild(questionElement);
 
-    
     questionIndex++;
   } else {
     questions.textContent = "No more questions available.";
@@ -66,10 +63,9 @@ function displayQuestion() {
 }
 
 
+fetchQuestions();
+
+
 button.addEventListener("click", () => {
-  if (questionList.length === 0) {
-    fetchQuestions(); 
-  } else {
-    displayQuestion(); 
-  }
+  displayQuestion();
 });
