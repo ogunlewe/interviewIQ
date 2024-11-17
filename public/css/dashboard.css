@@ -59,7 +59,7 @@ body {
 .progress-indicator {
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, #005e03, #03a50b);
+    background: linear-gradient(90deg, #5709b6, #231337);
     border-radius: 10px;
     transition: width 0.4s ease-in-out;
 }
@@ -70,7 +70,7 @@ body {
     right: 0;
     width: 15px;
     height: 15px;
-    background-color: #095c0b;
+    background-color: #5709b6;
     border-radius: 50%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.4s ease-in-out;
