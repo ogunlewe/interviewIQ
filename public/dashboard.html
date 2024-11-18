@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -63,7 +64,7 @@
           <div class="mx-auto max-w-7xl px-6 lg:px-8">
 
             <div class="button-headers">
-              <button type="button" class="mock-interview">Start Mock Interview</button>
+              <button type="button" class="mock-interview"> <a href="interview.html">Start Mock Interview</a></button>
 
               <button type="button" class="mock-interview">Practice Exercise</button>
     
@@ -112,14 +113,17 @@
                           <path fill-rule="evenodd" d="M4 13a2 2 0 1 0 0 4h12a2 2 0 1 0 0-4H4Zm11.24 2a.75.75 0 0 1 .75-.75H16a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75h-.01a.75.75 0 0 1-.75-.75V15Zm-2.25-.75a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75h-.01Z" clip-rule="evenodd" />
                         </svg>
                         Progress Tracking
-
                       </dt>
                       <dd class="inline">Monitor your performance with detailed analytics. Identify your strengths and areas for improvement to focus your preparation.</dd>
                     </div>
                   </dl>
-                </div>
+
+                </div> 
               </div>
-             
+              <div class="relative mt-16 h-80 lg:mt-8">
+                <canvas class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"  alt="App screenshot" width="1824" height="1080" id="myChart"></canvas>
+                
+              </div>
             </div>
           </div>
         </div>
