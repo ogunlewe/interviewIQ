@@ -8,13 +8,15 @@
     <script type="module" src="/interviewIQ/src/controller/interview.js"></script>
 </head>
 <body>
-    <div class="interview-container">
-        <h2>Interview Question</h2>
-        <p id="question" style="display: none;">Loading question...</p>
-        <textarea id="role" placeholder="Type your answer here..."></textarea>
-        <button onclick="generateInterviewQuestion()" id="submit">Submit Answer</button>
-        <p id="feedback"></p>
+    <h1>Technical Interview</h1>
+    <div class="question-container">
+        <p id="question-text">Fetching question...</p>
     </div>
+
+    <textarea id="answer-input" rows="5" placeholder="Type your answer here..."></textarea><br>
+    <button id="submit-button">Submit Answer</button>
+
+    <div id="feedback"></div>
     <script type="module" src="/interviewIQ/src/controller/gemini.js"></script>
 </body>
 </html>

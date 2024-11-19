@@ -78,89 +78,100 @@ myButtons.forEach(button => {
 
 
 let db;
+let selectedLevel = ''; // Variable to store the selected difficulty level
+
+// Initialize IndexedDB
 function initDB() {
-  const request = indexedDB.open('userDatabase', 1);
+    const request = indexedDB.open('userDatabase', 1);
 
-  request.onerror = (event) => {
-    console.error('Error opening IndexedDB:', event.target.error);
-  };
+    request.onerror = (event) => {
+        console.error('Error opening IndexedDB:', event.target.error);
+    };
 
-  request.onsuccess = (event) => {
-    db = event.target.result;
-    console.log('IndexedDB initialized');
-    displayStoredValue();
-    
-  };
+    request.onsuccess = (event) => {
+        db = event.target.result;
+        console.log('IndexedDB initialized');
+        displayStoredValue();
+    };
 
     request.onupgradeneeded = (event) => {
-      db = event.target.result;
-      const objectStore = db.createObjectStore('userStore', { keyPath: 'id' });
-      objectStore.transaction.oncomplete = () => {
-          console.log('Object store created');
-      };
-  };
-
+        db = event.target.result;
+        const objectStore = db.createObjectStore('userStore', { keyPath: 'id' });
+        console.log('Object store created');
+    };
 }
 
+// Save data to IndexedDB
 function saveToIndexedDB() {
-  const inputField = document.getElementById('name');
-  const userInput = inputField.value.trim();
+    const inputField = document.getElementById('name');
+    const userInput = inputField.value.trim();
 
-  if (userInput) {
-    const transaction = db.transaction(['userStore'], 'readwrite');
+    if (userInput && selectedLevel) {
+        const transaction = db.transaction(['userStore'], 'readwrite');
         const objectStore = transaction.objectStore('userStore');
 
         const data = {
-          id: 1,
-          value: userInput
+            id: 1,
+            value: userInput,
+            level: selectedLevel
         };
 
         const request = objectStore.put(data);
 
         request.onsuccess = () => {
-          console.log('Data Saved:', userInput);
-          displayStoredValue();
-          inputField.value = '';
+            console.log('Data Saved:', data);
+            displayStoredValue();
+            inputField.value = ''; // Clear input field after saving
         };
 
         request.onerror = (event) => {
-          console.error('Error saving data: ', event.target.error);
-          
-        }
-  }
-  else {
-    alert('Please enter a value')
-  }
-}
-
-
-function displayStoredValue() {
-  const transaction = db.transaction(['userStore'], 'readonly');
-  const objectStore = transaction.objectStore('userStore');
-
-  const request = objectStore.get(1);
-
-  request.onsuccess = (event) => {
-    const result = event.target.result;
-    const displayValue = document.getElementById('user-email');
-    
-    if (result) {
-      displayValue.textContent = result.value;
-
+            console.error('Error saving data:', event.target.error);
+        };
     } else {
-      displayValue.textContent = ' Error Displaying ';
+        alert('Please enter a name and select a difficulty level');
     }
-  };
-
-  request.onerror = (event) => {
-    console.error('Error retrieving data:', event.target.error);
-    
-  };
 }
+
+// Display stored data from IndexedDB
+function displayStoredValue() {
+    const transaction = db.transaction(['userStore'], 'readonly');
+    const objectStore = transaction.objectStore('userStore');
+
+    const request = objectStore.get(1);
+
+    request.onsuccess = (event) => {
+        const result = event.target.result;
+        const nameDisplay = document.getElementById('user-email');
+        const levelDisplay = document.getElementById('user-level');
+
+        if (result) {
+            nameDisplay.textContent = `Name: ${result.value}`;
+            levelDisplay.textContent = `Difficulty Level: ${result.level}`;
+        } else {
+            nameDisplay.textContent = 'Name: Not available';
+            levelDisplay.textContent = 'Difficulty Level: Not available';
+        }
+    };
+
+    request.onerror = (event) => {
+        console.error('Error retrieving data:', event.target.error);
+    };
+}
+
+
+function selectDifficulty(event) {
+    selectedLevel = event.target.getAttribute('section-2');
+    console.log('Selected Level:', selectedLevel);
+}
+
 
 window.addEventListener('load', () => {
-  initDB();
+    initDB();
 
-  const saveButton = document.getElementById('button');
-  saveButton.addEventListener('click', saveToIndexedDB)
+    document.getElementById('button1').addEventListener('click', selectDifficulty, saveToIndexedDB);
+    document.getElementById('button2').addEventListener('click', selectDifficulty, saveToIndexedDB);
+    document.getElementById('button3').addEventListener('click', selectDifficulty, saveToIndexedDB);
+
+    const saveButton = document.getElementById('save-button');
+    saveButton.addEventListener('click', saveToIndexedDB);
 });
