@@ -57,38 +57,21 @@
 // }
 
 
-// const questions = document.getElementById("question-text");
+ const questions = document.getElementById("question-text");
 // const button = document.getElementById("submit-button");
-const endpoint = "https://devq-api.vercel.app/api/questions";
+'use strict';
 
-// Function to fetch and display a question
-const fetchAndDisplayQuestion = async () => {
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-    });
+fetch('https://devq-api.vercel.app/api/questions')
+.then(res => {
+  return res.json();
+})
+.then(data => {
+  
+  console.log(data);
+})
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch questions: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log("API Response:", data); // Log response to confirm structure
-
-    // Check if the response contains a single question
-    if (data.question) {
-      questions.textContent = data.question;
-    } else if (Array.isArray(data.questions) && data.questions.length > 0) {
-      // If it's an array of questions, display the first one
-      questions.textContent = data.questions[0];
-    } else {
-      questions.textContent = "No questions available.";
-    }
-  } catch (error) {
-    console.error("Error generating questions:", error);
-    questions.textContent = "Error fetching questions.";
-  }
-};
-
+.catch(err => {
+  console.log(err)
+})
 // Attach event listener to the button
 // button.addEventListener("click", fetchAndDisplayQuestion);
