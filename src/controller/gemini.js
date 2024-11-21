@@ -31,7 +31,7 @@
 
 // generateQuestion("frontend").then(question => {
 //     console.log("Generated Question:", question);
-    
+
 // });
 
 // Make sure to include these imports:
@@ -56,59 +56,39 @@
 //     }
 // }
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+// const questions = document.getElementById("question-text");
+// const button = document.getElementById("submit-button");
+const endpoint = "https://devq-api.vercel.app/api/questions";
 
-// Function to generate the interview question
-async function generateInterviewQuestion() {
-    // Get the model configuration
-    const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
-        generationConfig: {
-            candidateCount: 1,
-            stopSequences: ["x"],
-            maxOutputTokens: 20,
-            temperature: 1.0,
-        },
+// Function to fetch and display a question
+const fetchAndDisplayQuestion = async () => {
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
     });
 
-    // Get the expertise input value
-    const expertise = document.getElementById('expertise').value.trim();
-    if (!expertise) {
-        alert("Please enter an expertise!");
-        return;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch questions: ${response.statusText}`);
     }
 
-    // Define the prompt
-    const prompt = `Generate an interview question for a ${expertise} engineer`;
+    const data = await response.json();
+    console.log("API Response:", data); // Log response to confirm structure
 
-    try {
-        // Generate content using the Gemini model
-        const result = await model.generateContent({
-            contents: [
-                {
-                    role: 'user',
-                    parts: [{ text: prompt }]
-                }
-            ],
-            generationConfig: {
-                maxOutputTokens: 1000,
-                temperature: 0.1,
-            },
-        });
-
-        // Access the generated response
-        const generatedQuestion = result.response;
-
-        // Display the response in the feedback element
-        const feedback = document.getElementById('feedback');
-        feedback.innerText = generatedQuestion || "No question generated.";
-    } catch (error) {
-        console.error("Error generating question:", error);
-        const feedback = document.getElementById('feedback');
-        feedback.innerText = "Error generating question.";
+    // Check if the response contains a single question
+    if (data.question) {
+      questions.textContent = data.question;
+    } else if (Array.isArray(data.questions) && data.questions.length > 0) {
+      // If it's an array of questions, display the first one
+      questions.textContent = data.questions[0];
+    } else {
+      questions.textContent = "No questions available.";
     }
-}
+  } catch (error) {
+    console.error("Error generating questions:", error);
+    questions.textContent = "Error fetching questions.";
+  }
+};
 
-// Expose the function to the global scope
-window.generateInterviewQuestion = generateInterviewQuestion;
+// Attach event listener to the button
+// button.addEventListener("click", fetchAndDisplayQuestion);
