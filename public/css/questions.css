@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2a3047;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+  }
+  
+  .container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+
+
+  
+  #search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    background-color: #6A0DAD;
+    color: #fff;
+  }
+  
+  .question-container {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .question-text {
+    background-color: #1E1E1E;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .question-container h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .difficulty {
+    font-size: 14px;
+    color: #BDBDBD;
+  }
+
+  div .question {
+        width: 300px;
+        background-color:#6A0DAD;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 0px 8px rgba(36, 1, 51, 0.611);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        text-align: center;
+        padding: 20px;
+      }
+      
+      .question:hover {
+        transform: scale(1.05); /* Scale on hover for a nice effect */
+      }
+  
+  
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #5c6bc0; /* Example color */
+    color: white;
+    margin-left: 350px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #9C27B0;
+  }
+  
