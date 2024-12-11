@@ -68,7 +68,7 @@ body {
   }
 
   div .question {
-        width: 300px;
+        width: 750px;
         background-color:#6A0DAD;
         color: white;
         border-radius: 10px;
@@ -76,7 +76,8 @@ body {
         overflow: hidden;
         transition: transform 0.3s ease;
         text-align: center;
-        padding: 20px;
+        padding: 30px;
+        margin: 15px;
       }
       
       .question:hover {

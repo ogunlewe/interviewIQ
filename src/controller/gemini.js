@@ -6,6 +6,7 @@ const button = document.getElementById("submit-button");
 let questionIndex = 0; 
 let questionList = []; 
 
+// Fetch questions from the API
 function fetchQuestions() {
   fetch('https://devq-api.vercel.app/api/questions', {
     method: "GET",
@@ -22,7 +23,7 @@ function fetchQuestions() {
       if (Array.isArray(data.beginner)) {
         questionList = data.beginner; 
         questionIndex = 0; 
-        displayQuestion(); 
+        displayQuestions(0, 10);  // Display first 10 questions
       } else {
         questions.textContent = "No questions available.";
       }
@@ -33,39 +34,40 @@ function fetchQuestions() {
     });
 }
 
-function displayQuestion() {
-  if (questionIndex < questionList.length) {
-    const currentQuestion = questionList[questionIndex];
+// Display a set of 10 questions
+function displayQuestions(startIndex, endIndex) {
+  // Clear previous questions
+  questions.innerHTML = '';
+
+  for (let i = startIndex; i < endIndex && i < questionList.length; i++) {
+    const currentQuestion = questionList[i];
     const questionText = currentQuestion.question;
     const additionalInfo = currentQuestion.answerHint;
 
-    questions.innerHTML = "";
     const questionElement = document.createElement("div");
     questionElement.className = "question";
 
-    
     const questionTextElement = document.createElement("p");
-    questionTextElement.textContent = `Q${questionIndex + 1}: ${questionText}`;
+    questionTextElement.textContent = `Q${i + 1}: ${questionText}`;
     questionElement.appendChild(questionTextElement);
 
-    
     const additionalInfoElement = document.createElement("p");
     additionalInfoElement.textContent = `Hint: ${additionalInfo}`;
     questionElement.appendChild(additionalInfoElement);
 
-    
     questions.appendChild(questionElement);
-
-    questionIndex++;
-  } else {
-    questions.textContent = "No more questions available.";
   }
+
+  // Increment questionIndex by 10 after displaying a set of 10 questions
+  questionIndex = endIndex;
 }
 
-
-fetchQuestions();
-
-
+// Event listener for button click to load the next set of questions
 button.addEventListener("click", () => {
-  displayQuestion();
+  const nextIndex = questionIndex;
+  const nextEndIndex = nextIndex + 10;
+  displayQuestions(nextIndex, nextEndIndex);
 });
+
+// Initial fetch of questions
+fetchQuestions();
