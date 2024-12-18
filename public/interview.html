@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto py-10">
+        <div class="bg-white shadow-md rounded p-6 max-w-xl mx-auto">
+            <h1 class="text-2xl font-bold mb-4 text-center">AI Interview</h1>
+            <div id="question-container" class="mb-6">
+                <p id="question" class="text-lg font-medium">Loading question...</p>
+            </div>
+            <textarea id="answer" class="w-full border rounded p-2 mb-4" placeholder="Type your answer here..."></textarea>
+            <button id="next-button" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Next</button>
+        </div>
+        <div id="result-container" class="hidden text-center mt-6">
+            <h2 class="text-xl font-bold">Interview Completed!</h2>
+            <p id="result" class="mt-4">Your performance will be evaluated soon.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+
+        const questionContainer = document.getElementById('question');
+        const answerInput = document.getElementById('answer');
+        const nextButton = document.getElementById('next-button');
+        const resultContainer = document.getElementById('result-container');
+
+        async function fetchQuestionFromGemini() {
+            // Placeholder function simulating an API call to Gemini
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("This is a dynamically fetched question from Gemini.");
+                }, 1000);
+            });
+        }
+
+        async function sendAnswerToGemini(answer) {
+            // Placeholder function simulating sending an answer to Gemini for processing
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    console.log(`Answer processed by Gemini: ${answer}`);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        async function loadQuestion() {
+            if (currentQuestionIndex < 5) { // Simulate 5 questions
+                const question = await fetchQuestionFromGemini();
+                questionContainer.textContent = question;
+                answerInput.value = '';
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.querySelector('div.bg-white').classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+        }
+
+        nextButton.addEventListener('click', async () => {
+            const answer = answerInput.value.trim();
+            if (answer) {
+                await sendAnswerToGemini(answer);
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                alert('Please provide an answer before proceeding.');
+            }
+        });
+
+        // Load the first question on page load
+        loadQuestion();
+    </script>
+</body>
+</html>
+
